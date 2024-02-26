@@ -8,4 +8,25 @@ import java.util.List;
 @RequestMapping("/VideojuegoCliente")
 public class VideojuegoController {
 
+    @Autowired
+    private final VideojuegoRepository repository;
+
+    public VideojuegoController(VideojuegoRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/videojuegos")
+    public List<Videojuego> allVideojuegos(){
+        return repository.findAll();
+    }
+
+    @GetMapping("/videojuegos/{id}")
+    public Videojuego videojuegoById(@PathVariable Integer id){
+        return repository.findVideojuegoById(id);
+    }
+
+    @GetMapping("/videojuegos/favoritos")
+    public List<Videojuego> videojuegosFavoritos(){
+        return repository.findFavoritos();
+    }
 }
